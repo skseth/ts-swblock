@@ -1,10 +1,10 @@
 {
-  "name": "chrome-extension-webpack",
+  "name": "ts-swblock",
   "engines": {
     "node": "^17.0.0"
   },
   "version": "0.2.0",
-  "description": "Get started with Chrome extensions development using webpack, Typescript, Sass, and more",
+  "description": "Block service workers",
   "scripts": {
     "start": "webpack --watch --config build/webpack.dev.js",
     "build-dev": "webpack --config build/webpack.dev.js",
