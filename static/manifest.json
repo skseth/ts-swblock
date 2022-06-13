@@ -1,0 +1,35 @@
+{
+  "name": "SWBlock",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "SW Block",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab", "scripting", "tabs", "storage", "notifications"],
+  "host_permissions": ["*://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "js": ["content-script.js"],
+      "matches": ["*://*/*"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject-stop-registrations.js"],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["inject-apply-preferences.js"],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["inject-remove-registration.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
