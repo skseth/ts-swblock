@@ -1,8 +1,8 @@
 import { sendAskServiceWorkerEvent } from './client';
 
-globalThis.__swb_prefs__ = { 
-  domain: "",
-  regs: {}
+globalThis.__swb_prefs__ = {
+  domain: new URL('/', location.href).href,
+  regs: {},
 };
 
 type RegisterAction = 'BLOCK' | 'ALLOW' | 'ASK';
