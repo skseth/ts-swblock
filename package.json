@@ -1,5 +1,6 @@
 {
   "name": "ts-swblock",
+  "sideEffects": false,
   "engines": {
     "node": "^17.0.0"
   },
