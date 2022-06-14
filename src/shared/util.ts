@@ -1,5 +1,3 @@
-
-
 export function browserIsFirefox() {
-  return /firefox/i.test(navigator.userAgent);
+  return /firefox/i.test(navigator.userAgent)
 }

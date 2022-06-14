@@ -1,35 +1,39 @@
-import { SWBackgroundEvent } from "../shared/api";
+import { SWBackgroundEvent } from '../shared/api'
 
 export function injectScript(filename: string, param?: string) {
-  const s = document.createElement('script');
-  s.src = chrome.runtime.getURL(filename);
+  const s = document.createElement('script')
+  s.src = chrome.runtime.getURL(filename)
   if (param) {
-      s.setAttribute("data-param", param)
+    s.setAttribute('data-param', param)
   }
   s.onload = function () {
-    s.remove();
-  };
-  (document.head || document.documentElement).appendChild(s);
+    s.remove()
+  }
+  ;(document.head || document.documentElement).appendChild(s)
 }
 
-export function injectScriptWithParam(filename: string, _paramName: string, paramVal: string) {
-//   injectMeta(paramName, paramVal)
+export function injectScriptWithParam(
+  filename: string,
+  _paramName: string,
+  paramVal: string,
+) {
+  //   injectMeta(paramName, paramVal)
   injectScript(filename, paramVal)
 }
 
 function relayMessageToBackground(event: MessageEvent<unknown>) {
-  if(event.source != window){
-    return;
+  if (event.source != window) {
+    return
   }
 
   if (event.data) {
-      console.log(`in relaymessage ${JSON.stringify(event.data)}`);
-      chrome.runtime.sendMessage({data: event.data})
+    console.log(`in relaymessage ${JSON.stringify(event.data)}`)
+    chrome.runtime.sendMessage({ data: event.data })
   }
 }
 
 export function setupRelayToBackground() {
-    window.addEventListener('message', relayMessageToBackground, false);
+  window.addEventListener('message', relayMessageToBackground, false)
 }
 
 export function onBackgroundEvent(fn: (event: SWBackgroundEvent) => void) {
@@ -40,7 +44,5 @@ export function onBackgroundEvent(fn: (event: SWBackgroundEvent) => void) {
     _sendResponse,
   ) {
     fn(request)
-  });
+  })
 }
-
-

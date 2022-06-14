@@ -1,41 +1,42 @@
-import { onBlockingDecision } from './decisionserver';
-import { browserIsFirefox } from '../shared/util';
+import { onBlockingDecision } from './decisionserver'
+import { browserIsFirefox } from '../shared/util'
 
-let askListenersInitialized = false;
+let askListenersInitialized = false
 
 function splitDomainURLFromNotificationId(notificationId: string) {
-  const split = notificationId.split('|');
-  return { domain: split[0], scriptURL: split[1] };
+  const split = notificationId.split('|')
+  return { domain: split[0], scriptURL: split[1] }
 }
 
 function initializeAskListeners() {
   if (askListenersInitialized) {
-    return;
+    return
   }
 
   const handleClick = (notificationId: string, isBlocked: boolean) => {
     console.log(`handleClick notificationid ${notificationId}`)
-    const { domain, scriptURL } = splitDomainURLFromNotificationId(notificationId);
-    console.log(`handleClick domain ${domain} ${scriptURL}`);
+    const { domain, scriptURL } =
+      splitDomainURLFromNotificationId(notificationId)
+    console.log(`handleClick domain ${domain} ${scriptURL}`)
     onBlockingDecision(domain, scriptURL, isBlocked)
-  };
+  }
 
   if (browserIsFirefox()) {
     chrome.notifications.onClicked.addListener((notificationId) =>
       handleClick(notificationId, true),
-    );
+    )
   } else {
     chrome.notifications.onButtonClicked.addListener(
       (notificationId, buttonIndex) =>
         handleClick(notificationId, buttonIndex === 1),
-    );
+    )
   }
-  askListenersInitialized = true;
+  askListenersInitialized = true
 }
 
 export function showDecisionUI(domain: string, scriptURL: string) {
   console.log(`show decision UI domain ${domain} scriptURL ${scriptURL}`)
-  const isFirefox = browserIsFirefox();
+  const isFirefox = browserIsFirefox()
 
   const options: chrome.notifications.NotificationOptions<true> = {
     type: 'basic',
@@ -44,10 +45,9 @@ export function showDecisionUI(domain: string, scriptURL: string) {
     title: `(${domain}:${scriptURL}) Service worker`,
     buttons: isFirefox ? undefined : [{ title: 'ALLOW' }, { title: 'BLOCK' }],
     requireInteraction: isFirefox ? undefined : true,
-  };
+  }
 
+  initializeAskListeners()
 
-  initializeAskListeners();
-
-  chrome.notifications.create(domain + '|' + scriptURL, options);
+  chrome.notifications.create(domain + '|' + scriptURL, options)
 }

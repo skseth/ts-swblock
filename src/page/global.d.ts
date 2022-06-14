@@ -1,6 +1,6 @@
 /* eslint-disable no-var */
-import { SWPreferences } from '../shared/api';
+import { SWPreferences } from '../shared/api'
 
 declare global {
-  var __swb_prefs__: SWPreferences;
+  var __swb_prefs__: SWPreferences
 }

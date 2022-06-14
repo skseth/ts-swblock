@@ -1,21 +1,13 @@
-import { SWEvent } from "../shared/api";
+import { SWEvent } from '../shared/api'
 
-function sendEvent(data: SWEvent)
-{
-  window.postMessage(data,
-    '*',
-  );
+function sendEvent(data: SWEvent) {
+  window.postMessage(data, '*')
 }
 
-export function sendAskServiceWorkerEvent(
-  domain: string,
-  scriptURL: string
-) {
+export function sendAskServiceWorkerEvent(domain: string, scriptURL: string) {
   sendEvent({
-      type: 'ASKSW',
-      domain,
-      scriptURL: scriptURL
-    });
+    type: 'ASKSW',
+    domain,
+    scriptURL: scriptURL,
+  })
 }
-
-
