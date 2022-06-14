@@ -1,19 +1,21 @@
-const path = require('path');
-const webpack = require("webpack")
+import * as path from 'path'
+import DotenvPlugin from 'dotenv-webpack'
+import ESLintPlugin from 'eslint-webpack-plugin'
+import CopyPlugin from 'copy-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+// const DotenvPlugin = require('dotenv-webpack');
+// const ESLintPlugin = require('eslint-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const DotenvPlugin = require('dotenv-webpack');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ROOT_PATH = path.join(__dirname, '..')
+const SRC_PATH = path.join(ROOT_PATH, 'src')
+const BG_PATH = path.join(SRC_PATH, 'background')
+const CONTENT_PATH = path.join(SRC_PATH, 'content')
+const PAGE_PATH = path.join(SRC_PATH, 'page')
+const POPUP_PATH = path.join(SRC_PATH, 'popup')
 
-const ROOT_PATH = path.join(__dirname, '..');
-const SRC_PATH = path.join(ROOT_PATH, 'src');
-const BG_PATH = path.join(SRC_PATH, 'background');
-const CONTENT_PATH = path.join(SRC_PATH, 'content');
-const PAGE_PATH = path.join(SRC_PATH, 'page');
-const POPUP_PATH = path.join(SRC_PATH, 'popup');
-
-module.exports = {
+export default {
   entry: {
     background: path.join(BG_PATH, 'index.ts'),
     'content-script': path.join(CONTENT_PATH, 'index.ts'),
@@ -29,18 +31,13 @@ module.exports = {
       PAGE_PATH,
       'inject-remove-registration',
     ),
-    'popup': path.join(
-      POPUP_PATH,
-      'index.ts',
-    ),
+    popup: path.join(POPUP_PATH, 'index.ts'),
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        include: [
-          CONTENT_PATH,
-        ],
+        include: [CONTENT_PATH],
         use: [
           {
             loader: 'ts-loader',
@@ -54,8 +51,7 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        include: [BG_PATH
-        ],
+        include: [BG_PATH],
         use: [
           {
             loader: 'ts-loader',
@@ -139,4 +135,4 @@ module.exports = {
       patterns: [{ from: 'static' }],
     }),
   ],
-};
+}
