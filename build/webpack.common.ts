@@ -37,6 +37,7 @@ function tsBuild(
 }
 
 const config: webpack.Configuration = {
+  context: ROOT_PATH,
   entry: {
     background: path.join(BG_PATH, 'index.ts'),
     'content-script': path.join(CONTENT_PATH, 'index.ts'),
@@ -68,6 +69,7 @@ const config: webpack.Configuration = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    alias: { '@lib': path.join(ROOT_PATH, 'packages') },
   },
   output: {
     filename: '[name].js',

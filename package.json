@@ -8,7 +8,7 @@
   "description": "Block service workers",
   "scripts": {
     "start": "webpack --watch --config build/webpack.dev.ts",
-    "build-dev": "webpack --config build/webpack.dev.ts",
+    "build-dev": "webpack --stats-error-details --config build/webpack.dev.ts",
     "build": "webpack --config build/webpack.prod.ts",
     "lint": "eslint --fix --ext .ts,.js --max-warnings=0 .",
     "prettier": "prettier --write"
@@ -63,8 +63,5 @@
     "singleQuote": true,
     "trailingComma": "all",
     "editorconfig": true
-  },
-  "workspaces": [
-    "./packages/*"
-  ]
+  }
 }

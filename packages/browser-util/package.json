@@ -2,6 +2,7 @@
   "name": "@lib/browser-util",
   "version": "1.0.0",
   "types": "./lib/index.d.ts",
+  "main": "./lib/index.js",
   "exports": {
     "import": "./lib/index.js"
   }
