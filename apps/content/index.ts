@@ -1,4 +1,4 @@
-import { getPreferencesForDomainSync } from '../shared-bg/storage'
+import { getPreferencesForDomainSync } from '@lib/storage'
 import { injectScript, onBackgroundEvent, setupRelayToBackground } from './util'
 
 console.log(`SWBlock - content location ${location.href}`)

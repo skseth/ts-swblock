@@ -1,0 +1,14 @@
+{
+  "extends": "../../build/tsconfig.background.json",
+  "references": [
+    {
+      "path": "../../packages/api"
+    },
+    {
+      "path": "../../packages/storage"
+    },
+    {
+      "path": "../../packages/browser-util"
+    }
+  ]
+}

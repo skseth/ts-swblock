@@ -1,0 +1,9 @@
+{
+  "extends": "../../build/tsconfig.popup.json",
+
+  "references": [
+    {
+      "path": "../../packages/storage"
+    }
+  ]
+}

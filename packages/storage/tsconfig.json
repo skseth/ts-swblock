@@ -1,0 +1,10 @@
+{
+  "extends": "../../build/tsconfig.content.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "include": ["src/**/*"],
+  "references": [{ "path": ["../api"] }]
+}

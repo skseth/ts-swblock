@@ -4,6 +4,12 @@
     "module": "ES2020",
     "target": "ES2017",
     "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "baseUrl": "..",
+    "paths": {
+      "@lib/*": ["packages/*", "../packages/*", "../../packages/*"]
+    }
   }
 }

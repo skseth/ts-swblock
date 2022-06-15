@@ -1,4 +1,4 @@
-import { SWPreferences } from '../shared/api'
+import { SWPreferences } from '@lib/api'
 
 export function getAllPreferences(): Promise<SWPreferences[]> {
   return new Promise((resolve, _reject) => {

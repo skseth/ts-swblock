@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.common.json",
   "compilerOptions": {
-    "lib": ["ES2015"],
-    "types": ["chrome", "serviceworker"]
+    "lib": ["DOM", "ES2015"],
+    "types": ["chrome"]
   }
 }

@@ -1,7 +1,7 @@
 import {
   getAllPreferences,
   removeRegistrationForServiceWorker,
-} from '../shared-bg/storage'
+} from '@lib/storage'
 
 function escapeHtml(unsafe: string) {
   return unsafe.replace(

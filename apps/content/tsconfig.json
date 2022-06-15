@@ -1,0 +1,12 @@
+{
+  "extends": "../../build/tsconfig.content.json",
+
+  "references": [
+    {
+      "path": "../../packages/api"
+    },
+    {
+      "path": "../../packages/storage"
+    }
+  ]
+}

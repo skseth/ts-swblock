@@ -1,5 +1,5 @@
 import { onBlockingDecision } from './decisionserver'
-import { browserIsFirefox } from '../shared/util'
+import { browserIsFirefox } from '@lib/browser-util'
 
 let askListenersInitialized = false
 
@@ -34,9 +34,13 @@ function initializeAskListeners() {
   askListenersInitialized = true
 }
 
-export function showDecisionUI(domain: string, scriptURL: string) {
+export async function showDecisionUI(domain: string, scriptURL: string) {
   console.log(`show decision UI domain ${domain} scriptURL ${scriptURL}`)
   const isFirefox = browserIsFirefox()
+
+  if (isFirefox) {
+    await onBlockingDecision(domain, scriptURL, true)
+  }
 
   const options: chrome.notifications.NotificationOptions<true> = {
     type: 'basic',

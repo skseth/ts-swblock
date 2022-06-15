@@ -1,4 +1,4 @@
-import { SWEvent } from '../shared/api'
+import { SWEvent } from '@lib/api'
 
 function sendEvent(data: SWEvent) {
   window.postMessage(data, '*')

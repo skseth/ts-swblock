@@ -1,0 +1,8 @@
+{
+  "name": "@lib/browser-util",
+  "version": "1.0.0",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    "import": "./lib/index.js"
+  }
+}
