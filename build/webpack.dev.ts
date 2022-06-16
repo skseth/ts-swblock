@@ -1,8 +1,10 @@
 import * as webpack from 'webpack'
+
+// This is required to get correct type for devServer in configuration
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import webpackDevServer from 'webpack-dev-server'
 import { merge } from 'webpack-merge'
-import common from './webpack.common'
+import common from './webpack.common.js'
 import TerserPlugin from 'terser-webpack-plugin'
 
 export default merge<webpack.Configuration>(common, {

@@ -4,6 +4,12 @@ import DotenvPlugin from 'dotenv-webpack'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+
+// 👇️ "/home/john/Desktop/javascript"
+const __dirname = path.dirname(__filename)
 // import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 
 const ROOT_PATH = path.join(__dirname, '..')

@@ -4,6 +4,8 @@
   "types": "./lib/index.d.ts",
   "main": "./lib/index.js",
   "exports": {
-    "import": "./lib/index.js"
+    ".": {
+      "import": "./lib/index.js"
+    }
   }
 }
