@@ -1,8 +1,8 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { merge } from 'webpack-merge'
-import common from './webpack.common'
+import common from './webpack.common.js'
 
-module.exports = merge<webpack.Configuration>(common, {
+export default merge<webpack.Configuration>(common, {
   mode: 'production',
   optimization: {
     usedExports: true,

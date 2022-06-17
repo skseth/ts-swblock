@@ -1,4 +1,4 @@
-import { onBlockingDecision } from './decisionserver'
+import { onBlockingDecision } from './decisionserver.js'
 import { browserIsFirefox } from '@lib/browser-util'
 
 let askListenersInitialized = false

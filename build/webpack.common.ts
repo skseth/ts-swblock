@@ -4,6 +4,7 @@ import DotenvPlugin from 'dotenv-webpack'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import ResolveTypescriptPlugin from 'resolve-typescript-plugin'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -49,15 +50,15 @@ const config: webpack.Configuration = {
     'content-script': path.join(CONTENT_PATH, 'index.ts'),
     'inject-stop-registrations': path.join(
       PAGE_PATH,
-      'inject-stop-registrations',
+      'inject-stop-registrations.ts',
     ),
     'inject-apply-preferences': path.join(
       PAGE_PATH,
-      'inject-apply-preferences',
+      'inject-apply-preferences.ts',
     ),
     'inject-remove-registration': path.join(
       PAGE_PATH,
-      'inject-remove-registration',
+      'inject-remove-registration.ts',
     ),
     popup: path.join(POPUP_PATH, 'index.ts'),
   },
@@ -74,8 +75,14 @@ const config: webpack.Configuration = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
-    alias: { '@lib': path.join(ROOT_PATH, 'packages') },
+    /***** 
+        This is plugin is necessary as we are using "esnext" modules with "nodenext" module resolution 
+        This means our typescript files have statements like "import x from './util.js'" where ./util.ts 
+        exists, but there is no ./util.js file.
+
+        VSCode and TSC take care of this, but webpack doesn't, hence the plugin.
+    *****/
+    plugins: [new ResolveTypescriptPlugin()],
   },
   output: {
     filename: '[name].js',

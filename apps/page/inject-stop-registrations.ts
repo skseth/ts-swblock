@@ -1,4 +1,4 @@
-import { sendAskServiceWorkerEvent } from './client'
+import { sendAskServiceWorkerEvent } from './client.js'
 
 globalThis.__swb_prefs__ = {
   domain: new URL('/', location.href).href,

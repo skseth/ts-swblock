@@ -8,9 +8,9 @@
   "version": "0.2.0",
   "description": "Block service workers",
   "scripts": {
-    "start": "webpack --watch --config build/webpack.dev.ts",
+    "start": "ts-node node_modules/.bin/webpack --watch --config build/webpack.dev.ts",
     "build-dev": "ts-node node_modules/.bin/webpack --stats-error-details --config build/webpack.dev.ts",
-    "build": "webpack --config build/webpack.prod.ts",
+    "build": "ts-node node_modules/.bin/webpack --stats-error-details --config build/webpack.prod.ts",
     "lint": "eslint --fix --ext .ts,.js --max-warnings=0 .",
     "prettier": "prettier --write"
   },
@@ -56,6 +56,7 @@
     "@types/webpack-dev-server": "^4.7.2",
     "eslint-plugin-json": "^3.1.0",
     "normalize.css": "^8.0.1",
+    "resolve-typescript-plugin": "^1.2.0",
     "webpack-dev-server": "^4.9.2"
   },
   "browserslist": "> 0.25%, not dead",
@@ -67,5 +68,8 @@
   },
   "workspaces": [
     "./packages/*"
+  ],
+  "workspacesComments": [
+    "do an npm install to create a symlink in node_modules to the shared libraries in the packages folder."
   ]
 }

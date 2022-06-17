@@ -27,6 +27,15 @@ function toggleElem(elem: HTMLElement) {
   }
 }
 
+function byId(elementId: string) {
+  const elem = document.getElementById(elementId)
+  if (elem) {
+    return elem
+  } else {
+    throw Error(`Element with if ${elementId} not found`)
+  }
+}
+
 function isEmptyObject(val: Record<string, unknown>) {
   return typeof val !== 'object' || Object.keys(val).length === 0
 }
@@ -35,13 +44,13 @@ function blockedClass(isBlocked: boolean) {
   return isBlocked ? 'blocked' : 'unblocked'
 }
 
-const buttonResetAll = document.getElementById('resetAll')
-const ulDomains = document.getElementById('domains')
+const buttonResetAll = byId('resetAll') as HTMLButtonElement
+const ulDomains = byId('domains')
 
 buttonResetAll.addEventListener('click', (_e) => {
   chrome.storage.sync.clear()
-  hideElem(document.getElementById('domains'))
-  hideElem(document.getElementById('clear_settings'))
+  hideElem(byId('domains'))
+  hideElem(byId('clear_settings'))
 })
 
 document.addEventListener('click', async (e) => {
@@ -57,7 +66,7 @@ document.addEventListener('click', async (e) => {
     const domainElem = (
       entryType === 'domain'
         ? parentElem
-        : parentElem.parentElement.previousElementSibling
+        : parentElem?.parentElement?.previousElementSibling
     ) as HTMLElement
     const domainName = domainElem.dataset.domain
     const spanElem = domainElem.nextElementSibling as HTMLElement
@@ -79,16 +88,25 @@ document.addEventListener('click', async (e) => {
       }
     }
 
+    if (!domainName) {
+      throw Error(`Domain is unexpectedly not defined for document.clickevent`)
+    }
+
     if (currentElem.tagName === 'A' && entryType === 'domain') {
       console.log(`  parent has domain - toggling view`)
       toggleElem(spanElem)
     }
 
     if (currentElem.tagName === 'BUTTON') {
-      await removeDomain(
-        domainName,
-        entryType === 'domain' ? '' : parentElem.getAttribute('id'),
-      )
+      const scriptURL =
+        entryType === 'domain' ? '' : parentElem.getAttribute('id')
+
+      if (!scriptURL) {
+        throw Error(
+          `id field for scriptURL is unexpectedly not defined for document.clickevent`,
+        )
+      }
+      await removeDomain(domainName, scriptURL)
     }
   }
 })

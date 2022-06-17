@@ -1,4 +1,4 @@
-import { SWBackgroundEvent } from '@lib/api'
+import { type SWBackgroundEvent } from '@lib/api'
 import { addRegistrationForDomainSync } from '@lib/storage'
 
 // on decision being confirmed by ui
@@ -8,25 +8,28 @@ export async function onBlockingDecision(
   isBlocked: boolean,
 ) {
   await addRegistrationForDomainSync(domain, scriptURL, isBlocked)
-  notifyBlockingDecision(domain, scriptURL, isBlocked)
+  await notifyBlockingDecision(domain, scriptURL, isBlocked)
 }
 
 // tell the tab to remove service worker, if registered
-function notifyBlockingDecision(
+async function notifyBlockingDecision(
   domain: string,
   scriptURL: string,
   isBlocked: boolean,
 ) {
   console.log(`notifyBlockingDecision ${domain}*`)
-  chrome.tabs.query({ url: `${domain}*` }, function (tabs) {
-    if (!isBlocked) {
-      chrome.tabs.reload(tabs[0].id)
-    } else {
-      console.log(`notify ${domain} ${scriptURL}`)
-      notifyEventToContentScript(tabs[0].id, {
-        type: 'REMOVESW',
-        scriptURL,
-      })
+  chrome.tabs.query({ url: `${domain}*` }, async function (tabs) {
+    const tabId = tabs[0].id
+    if (typeof tabId !== 'undefined') {
+      if (!isBlocked) {
+        await chrome.tabs.reload(tabId, {})
+      } else {
+        console.log(`notify ${domain} ${scriptURL}`)
+        notifyEventToContentScript(tabId, {
+          type: 'REMOVESW',
+          scriptURL,
+        })
+      }
     }
   })
 }

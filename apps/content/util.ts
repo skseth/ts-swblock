@@ -1,4 +1,4 @@
-import { SWBackgroundEvent } from '@lib/api'
+import { type SWBackgroundEvent } from '@lib/api'
 
 export function injectScript(filename: string, param?: string) {
   const s = document.createElement('script')

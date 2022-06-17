@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 
 // This is required to get correct type for devServer in configuration
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

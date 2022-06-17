@@ -1,5 +1,9 @@
 import { getPreferencesForDomainSync } from '@lib/storage'
-import { injectScript, onBackgroundEvent, setupRelayToBackground } from './util'
+import {
+  injectScript,
+  onBackgroundEvent,
+  setupRelayToBackground,
+} from './util.js'
 
 console.log(`SWBlock - content location ${location.href}`)
 
