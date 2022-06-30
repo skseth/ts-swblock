@@ -46,21 +46,24 @@ function tsBuild(
 const config: webpack.Configuration = {
   context: ROOT_PATH,
   entry: {
-    background: path.join(BG_PATH, 'index.ts'),
-    'content-script': path.join(CONTENT_PATH, 'index.ts'),
+    background: path.join(BG_PATH, 'src', 'index.ts'),
+    'content-script': path.join(CONTENT_PATH, 'src', 'index.ts'),
     'inject-stop-registrations': path.join(
       PAGE_PATH,
+      'src',
       'inject-stop-registrations.ts',
     ),
     'inject-apply-preferences': path.join(
       PAGE_PATH,
+      'src',
       'inject-apply-preferences.ts',
     ),
     'inject-remove-registration': path.join(
       PAGE_PATH,
+      'src',
       'inject-remove-registration.ts',
     ),
-    popup: path.join(POPUP_PATH, 'index.ts'),
+    popup: path.join(POPUP_PATH, 'src', 'index.ts'),
   },
   module: {
     rules: [

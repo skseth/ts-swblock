@@ -1,5 +1,6 @@
 {
   "extends": "../../build/tsconfig.page.json",
+  "include": ["src/**/*"],
   "references": [
     {
       "path": "../../packages/api"
