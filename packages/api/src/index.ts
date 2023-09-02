@@ -11,7 +11,17 @@ export interface RemoveServiceWorkerEvent {
   scriptURL: string
 }
 
-export type SWBackgroundEvent = RemoveServiceWorkerEvent
+export interface FieldValue {
+  selector: string
+  value: string
+}
+
+export interface AddFieldValueEvent {
+  type: 'ADD_FIELD_VALUE'
+  fields: FieldValue[]
+}
+
+export type SWBackgroundEvent = RemoveServiceWorkerEvent | AddFieldValueEvent
 
 export type SWPreferences = {
   domain: string

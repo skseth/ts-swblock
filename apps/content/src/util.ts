@@ -27,7 +27,7 @@ function relayMessageToBackground(event: MessageEvent<unknown>) {
   }
 
   if (event.data) {
-    console.log(`in relaymessage ${JSON.stringify(event.data)}`)
+    // console.log(`in relaymessage ${JSON.stringify(event.data)}`)
     chrome.runtime.sendMessage({ data: event.data })
   }
 }
